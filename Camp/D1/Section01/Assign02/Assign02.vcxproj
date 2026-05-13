@@ -134,6 +134,7 @@
     <ClInclude Include="header\Game.h" />
     <ClInclude Include="header\Inventory.h" />
     <ClInclude Include="header\Item.h" />
+    <ClInclude Include="header\jobs.h" />
     <ClInclude Include="header\Monster.h" />
     <ClInclude Include="header\Player.h" />
   </ItemGroup>

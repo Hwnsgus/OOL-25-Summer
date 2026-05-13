@@ -1,12 +1,15 @@
 // Game.h
 #pragma once
 #include <string>
+#include "Player.h"
 
 class Game {
 public:
     // 게임을 실행하는 메인 로직 함수
-    void run();
+    Player* run();
     
     // 요구사항에 명시된 상태 출력 함수
     void printStatus(std::string name, int stat[]);
+    
+    void battle(Player* player);
 };
