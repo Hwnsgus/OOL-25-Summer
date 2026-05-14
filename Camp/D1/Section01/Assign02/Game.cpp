@@ -142,59 +142,114 @@ Player* Game::run()
         cout <<"잘못된 선택입니다 기본 전사로 시작합니다";
         player = new Warrior(name, stat[0], stat[1], stat[2], stat[3]);
     }
-
+    
     return player;
 }
 
-    void Game::battle(Player* player)
+void Game::MainMenu(Player* player)
+{
+    bool isQuit = false;
+    while (!isQuit)
     {
-        //몬스터 기본 스펙 이름, hp, mp, defense 순
-        Monster slime("슬라임", 50, 40, 10, "슬라임의 액체", 5);
+        cout << "\n=== 메인 메뉴 ===\n";
+        cout << " 1. 던전 입장 (전투)\n";
+        cout <<" 2. 인벤토리 확인\n";
+        cout << "0. 게임종료\n";
+        cout <<"선택: ";
         
-        cout << "\n===========================================\n";
-        cout << "[ 전투 시작! ] " << player->getName() << " vs " << slime.getName() << "\n";
-        cout << "===========================================\n";
+        int choice;
+        cin >> choice;
 
-        while (player->getHp() >0 && slime.getHp() >0)
+        switch (choice)
         {
-            cout << "\n--- 플레이어 턴 ---\n";
-            player->attack();
+        case 1:
+            battle(player);
+            break;
             
-            int damage = player->getPower()-slime.getDefence();
-            if (damage <=0) damage = 1;
+        case 2:
+            showInventory();
+            break;
             
-            int prevHp = slime.getHp();
-            int currentHp = prevHp - damage;
-            slime.setHp(currentHp);
+        case 0:
+            cout<<"게임을 종료합니다";
+            isQuit = true;
+            break;
             
-            cout << slime.getName() << "에게" << damage << "데미지" << endl;
-            cout << slime.getName() << "HP: " << prevHp << "->" << endl;
-            
-            if (currentHp = 0)
-            {
-                cout << slime.getName() << "사망" << endl;
-                break;
-            }else
-            {
-                cout << endl;
-            }
-            
-            cout << "\n--- 몬스터 턴 ---\n";
-            slime.attack(player);
-            cout << player->getName() << "HP:" << player->getHp()<< endl;
+        default:
+            cout << "잘못된 입력입니다.\n";
+            break;
         }
+    }
+}
+
+void Game::battle(Player* player)
+{
+    //몬스터 기본 스펙 이름, hp, mp, defense 순
+    Monster slime("슬라임", 50, 40, 10, "슬라임의 액체", 5);
         
-        if (player->getHp() > 0)
+    cout << "\n===========================================\n";
+    cout << "[ 전투 시작! ] " << player->getName() << " vs " << slime.getName() << "\n";
+    cout << "===========================================\n";
+
+    while (player->getHp() >0 && slime.getHp() >0)
+    {
+        cout << "\n--- 플레이어 턴 ---\n";
+        player->attack();
+            
+        int damage = player->getPower()-slime.getDefence();
+        if (damage <=0) damage = 1;
+            
+        int prevHp = slime.getHp();
+        int currentHp = prevHp - damage;
+        slime.setHp(currentHp);
+            
+        cout << slime.getName() << "에게" << damage << "데미지" << endl;
+        cout << slime.getName() << "HP: " << prevHp << "->" << endl;
+            
+        if (currentHp = 0)
         {
-            cout << "\n 전투 승리! \n";
-            cout << " -> " << slime.getdropItemName() << "획득!!"<<endl;
-            cout << " (다음 단계에서 인벤토리에 저장됩니다)"<<endl;
-        } else
+            cout << slime.getName() << "사망" << endl;
+            break;
+        }else
         {
-            cout<< "\n 전투에서 패배했습니다...\n";
-            cout<<"마을로 이동합니다"<<endl;
+            cout << endl;
         }
+            
+        cout << "\n--- 몬스터 턴 ---\n";
+        slime.attack(player);
+        cout << player->getName() << "HP:" << player->getHp()<< endl;
+    }
         
+    if (player->getHp() > 0)
+    {
+        cout << "\n 전투 승리! \n";
+        string dropName = slime.getdropItemName();
+        int dropPrice = 30;
+            
+            
+        cout << "인벤토리에 저장되었습니다."<<endl;
+        cout << " (다음 단계에서 인벤토리에 저장됩니다)"<<endl;
+    } else
+    {
+        cout<< "\n 전투에서 패배했습니다...\n";
+        cout<<"마을로 이동합니다"<<endl;
+    }
+}
+
+
+void Game::showInventory()
+{
+    cout << "\n[ 인벤토리 (" << inventory.size() << "종류의 아이템) ]" << endl;
+            
+    if (inventory.empty())
+    {
+        cout << "인벤토리가 비어있습니다. \n";
+        return;
+    }
+    for (auto const& [name, item] : inventory)
+    {
+        item.printInfo();
+    }
 }
 
 
