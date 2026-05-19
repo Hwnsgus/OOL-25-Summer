@@ -123,20 +123,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlchemyWorkshop.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\AlchemyWorkshop.h" />
     <ClInclude Include="header\Game.h" />
-    <ClInclude Include="header\Inventory.h" />
     <ClInclude Include="header\Item.h" />
     <ClInclude Include="header\jobs.h" />
     <ClInclude Include="header\Monster.h" />
     <ClInclude Include="header\Player.h" />
+    <ClInclude Include="header\PotionRecipe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

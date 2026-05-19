@@ -26,7 +26,7 @@ class Magician : public Player
     };
     void attack() override
     {
-        cout << "마법사" << name << "가 주문을 외웁니다. (데미지:" << power <<") \n";
+        cout << "마법사" << name << "이(가) 주문을 외웁니다. (데미지:" << power <<") \n";
     };
 };
 

@@ -1,6 +1,11 @@
 #include "header/Game.h"
+#include <windows.h>
+
 // main.cpp
 int main() {
+    
+    SetConsoleOutputCP(65001);
+    
     Game game;
     Player* player = nullptr;
     
@@ -11,7 +16,7 @@ int main() {
         player->printPlayerstats();
         
         // [ ] 다형성을 이용한 공격 호출
-        game.battle(player);
+        game.MainMenu(player);
 
         // [ ] 프로그램 종료 전 메모리 해제
         delete player;

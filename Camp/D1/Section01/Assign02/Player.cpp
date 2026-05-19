@@ -7,12 +7,12 @@ using namespace std;
 Player::Player(string n, int h, int m, int p, int d) : name(n), hp(h), mp(m), power(p), defence(d)
 {
     level = 1;
-    job = "ÃÊº¸ÀÚ";
+    job = "ì´ˆë³´ì";
 }
 
 void Player::printPlayerstats()
 {
-    std::cout << "\n[" << name << " (" << job << ") ÀÇ ´É·ÂÄ¡]\n";
+    std::cout << "\n[" << name << " (" << job << ") ì˜ ëŠ¥ë ¥ì¹˜]\n";
     std::cout << "Lv: " << level << " | HP: " << hp << " | MP: " << mp << "\n";
-    std::cout << "°ø°İ·Â: " << power << " | ¹æ¾î·Â: " << defence << "\n";
+    std::cout << "ê³µê²©ë ¥: " << power << " | ë°©ì–´ë ¥: " << defence << "\n";
 }

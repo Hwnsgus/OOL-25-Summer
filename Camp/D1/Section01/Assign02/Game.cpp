@@ -1,6 +1,11 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
+
 #include "header/Game.h"
+
+#include "header/AlchemyWorkshop.h"
 #include "header/Player.h"
 #include "header/jobs.h"
 #include "header/Monster.h"
@@ -14,43 +19,43 @@ Player* Game::run()
     int stat[SIZE] = {0}; 
     // stat[0] = HP
     // stat[1] = MP
-    // stat[2] = °ø°İ·Â
-    // stat[3] = ¹æ¾î·Â
+    // stat[2] = ê³µê²©ë ¥
+    // stat[3] = ë°©ì–´ë ¥
 
     cout << "===========================================\n";
-    cout << "   [ ´øÀü Å»Ãâ ÅØ½ºÆ® RPG ]\n";
+    cout << "   [ ë˜ì „ íƒˆì¶œ í…ìŠ¤íŠ¸ RPG ]\n";
     cout << "===========================================\n";
     
-    cout << "¿ë»çÀÇ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä: ";
+    cout << "ìš©ì‚¬ì˜ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ";
     cin >> name;
 
-    // [1] HP¿Í MP ÀÔ·Â À¯È¿¼º °Ë»ç (while ·çÇÁ)
+    // [1] HPì™€ MP ì…ë ¥ ìœ íš¨ì„± ê²€ì‚¬ (while ë£¨í”„)
     while (true) {
-        cout << "\nHP¿Í MP¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä: ";
+        cout << "\nHPì™€ MPë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”: ";
         cin >> stat[0] >> stat[1];
 
         if (stat[0] > 50 && stat[1] > 50) {
             break;
         } else {
-            cout << "HP³ª MPÀÇ °ªÀÌ ³Ê¹« ÀÛ½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n";
+            cout << "HPë‚˜ MPì˜ ê°’ì´ ë„ˆë¬´ ì‘ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n";
         }
     }
 
-    // [2] °ø°İ·Â°ú ¹æ¾î·Â ÀÔ·Â À¯È¿¼º °Ë»ç (while ·çÇÁ)
+    // [2] ê³µê²©ë ¥ê³¼ ë°©ì–´ë ¥ ì…ë ¥ ìœ íš¨ì„± ê²€ì‚¬ (while ë£¨í”„)
     while (true) {
-        cout << "°ø°İ·Â°ú ¹æ¾î·ÂÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä: ";
+        cout << "ê³µê²©ë ¥ê³¼ ë°©ì–´ë ¥ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ";
         cin >> stat[2] >> stat[3];
 
 
         if (stat[2] > 0 && stat[3] > 0) {
             break;
         } else {
-            cout << "°ø°İ·ÂÀÌ³ª ¹æ¾î·ÂÀÌ ³Ê¹« ÀÛ½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n";
+            cout << "ê³µê²©ë ¥ì´ë‚˜ ë°©ì–´ë ¥ì´ ë„ˆë¬´ ì‘ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n";
         }
     }
     cout << "\n";
     
-    cout << "* HP Æ÷¼Ç 5°³, MP Æ÷¼Ç 5°³°¡ ±âº» Áö±ŞµÇ¾ú½À´Ï´Ù"<< endl;
+    cout << "* HP í¬ì…˜ 5ê°œ, MP í¬ì…˜ 5ê°œê°€ ê¸°ë³¸ ì§€ê¸‰ë˜ì—ˆìŠµë‹ˆë‹¤"<< endl;
     
     int hpPotion = 5;
     int mpPotion = 5;
@@ -59,11 +64,11 @@ Player* Game::run()
     
     while (!isGameStart){
         cout << "====================================\n";
-        cout << "<Ä³¸¯ÅÍ °­È­>";
-        cout << " 1. HP UP 2. MP UP 3. °ø°İ·Â 2¹è"<< endl;
-        cout << " 4. ¹æ¾î·Â 2¹è 5. ÇöÀç ´É·ÂÄ¡ 0. °ÔÀÓ ½ÃÀÛ"<< endl;
+        cout << "<ìºë¦­í„° ê°•í™”>";
+        cout << " 1. HP UP 2. MP UP 3. ê³µê²©ë ¥ 2ë°°"<< endl;
+        cout << " 4. ë°©ì–´ë ¥ 2ë°° 5. í˜„ì¬ ëŠ¥ë ¥ì¹˜ 0. ê²Œì„ ì‹œì‘"<< endl;
         cout << "====================================\n";
-        cout << "¹øÈ£¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä" << endl;
+        cout << "ë²ˆí˜¸ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”" << endl;
         cin >> choice;
         
         switch (choice)
@@ -72,10 +77,10 @@ Player* Game::run()
             if (hpPotion > 0){
                 stat[0] += 20;
                 hpPotion--;
-                cout<< "HP°¡ 20 Áõ°¡Çß½À´Ï´Ù. (HP Æ÷¼Ç Â÷°¨ : ³²Àº Æ÷¼Ç " << hpPotion << ")" << endl;
+                cout<< "HPê°€ 20 ì¦ê°€í–ˆìŠµë‹ˆë‹¤. (HP í¬ì…˜ ì°¨ê° : ë‚¨ì€ í¬ì…˜ " << hpPotion << ")" << endl;
             } else
             {
-                cout << "HP Æ÷¼ÇÀÌ ºÎÁ·ÇÕ´Ï´Ù!" << endl;
+                cout << "HP í¬ì…˜ì´ ë¶€ì¡±í•©ë‹ˆë‹¤!" << endl;
             }  
             break;
             
@@ -84,36 +89,36 @@ Player* Game::run()
             {
                 stat[1] += 20;
                 mpPotion--;
-                cout<< "MP°¡ 20 Áõ°¡Çß½À´Ï´Ù. (MP Æ÷¼Ç Â÷°¨ : ³²Àº Æ÷¼Ç " << mpPotion << ")" << endl;
+                cout<< "MPê°€ 20 ì¦ê°€í–ˆìŠµë‹ˆë‹¤. (MP í¬ì…˜ ì°¨ê° : ë‚¨ì€ í¬ì…˜ " << mpPotion << ")" << endl;
             }
             else
             {
-                cout << "*MP Æ÷¼ÇÀÌ ºÎÁ·ÇÕ´Ï´Ù"<< endl;
+                cout << "*MP í¬ì…˜ì´ ë¶€ì¡±í•©ë‹ˆë‹¤"<< endl;
             }
             break;
             
         case 3:
             stat[2] += 2;
-            cout << "°ø°İ·ÂÀÌ 2¹è Áõ°¡Çß½À´Ï´Ù (ÇöÀç °ø°İ·Â:" << stat[2] << ")" << endl;
+            cout << "ê³µê²©ë ¥ì´ 2ë°° ì¦ê°€í–ˆìŠµë‹ˆë‹¤ (í˜„ì¬ ê³µê²©ë ¥:" << stat[2] << ")" << endl;
             break;
             
         case 4:
             stat[3] *= 2;
-            cout << "¹æ¾î·ÂÀÌ 2¹è Áõ°¡Çß½À´Ï´Ù (ÇöÀç ¹æ¾î·Â:" << stat[3] << ")" << endl;
+            cout << "ë°©ì–´ë ¥ì´ 2ë°° ì¦ê°€í–ˆìŠµë‹ˆë‹¤ (í˜„ì¬ ë°©ì–´ë ¥:" << stat[3] << ")" << endl;
             break;
             
         case 5:
-            // ¸¸µé¾îµĞ Ãâ·Â ÇÔ¼ö ÀçÈ°¿ë
+            // ë§Œë“¤ì–´ë‘” ì¶œë ¥ í•¨ìˆ˜ ì¬í™œìš©
             printStatus(name, stat); 
             break;
                 
         case 0:
-            cout << "°ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù!\n";
-            isGameStart = true; // ÇÃ·¡±×¸¦ true·Î ¹Ù²ã¼­ ´ÙÀ½ ÅÏ¿¡ while ·çÇÁ¸¦ Å»ÃâÇÏ°Ô ¸¸µì´Ï´Ù.
+            cout << "ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤!\n";
+            isGameStart = true; // í”Œë˜ê·¸ë¥¼ trueë¡œ ë°”ê¿”ì„œ ë‹¤ìŒ í„´ì— while ë£¨í”„ë¥¼ íƒˆì¶œ
             break;
                 
         default:
-            cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ¼±ÅÃÇØÁÖ¼¼¿ä.\n";
+            cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•´ì£¼ì„¸ìš”.\n";
             break;
             
         }
@@ -121,7 +126,7 @@ Player* Game::run()
     }
     
     int jobChoice;
-    cout << "Á÷¾÷À» ¼±ÅÃÇÏ¼¼¿ä (1. Àü»ç, 2. ¸¶¹ı»ç, 3. µµÀû, 4. ±Ã¼ö)";
+    cout << "ì§ì—…ì„ ì„ íƒí•˜ì„¸ìš” (1. ì „ì‚¬, 2. ë§ˆë²•ì‚¬, 3. ë„ì , 4. ê¶ìˆ˜)";
     cin >> jobChoice;
     
     Player* player = nullptr;
@@ -139,7 +144,7 @@ Player* Game::run()
         player = new Archer(name, stat[0], stat[1], stat[2], stat[3]);
     }else
     {
-        cout <<"Àß¸øµÈ ¼±ÅÃÀÔ´Ï´Ù ±âº» Àü»ç·Î ½ÃÀÛÇÕ´Ï´Ù";
+        cout <<"ì˜ëª»ëœ ì„ íƒì…ë‹ˆë‹¤ ê¸°ë³¸ ì „ì‚¬ë¡œ ì‹œì‘í•©ë‹ˆë‹¤";
         player = new Warrior(name, stat[0], stat[1], stat[2], stat[3]);
     }
     
@@ -151,11 +156,12 @@ void Game::MainMenu(Player* player)
     bool isQuit = false;
     while (!isQuit)
     {
-        cout << "\n=== ¸ŞÀÎ ¸Ş´º ===\n";
-        cout << " 1. ´øÀü ÀÔÀå (ÀüÅõ)\n";
-        cout <<" 2. ÀÎº¥Åä¸® È®ÀÎ\n";
-        cout << "0. °ÔÀÓÁ¾·á\n";
-        cout <<"¼±ÅÃ: ";
+        cout << "\n=== ë©”ì¸ ë©”ë‰´ ===\n";
+        cout << " 1. ë˜ì „ ì…ì¥ (ì „íˆ¬)\n";
+        cout <<" 2. ì¸ë²¤í† ë¦¬ í™•ì¸\n";
+        cout <<" 3. í¬ì…˜ ì œì‘ì†Œ\n";
+        cout << "0. ê²Œì„ì¢…ë£Œ\n";
+        cout <<"ì„ íƒ: ";
         
         int choice;
         cin >> choice;
@@ -170,13 +176,20 @@ void Game::MainMenu(Player* player)
             showInventory();
             break;
             
+        case 3:
+            {
+                AlchemyWorkshop workshop;
+                workshop.runWorkshop();
+                break;
+            }
+            
         case 0:
-            cout<<"°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù";
+            cout<<"ê²Œì„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤";
             isQuit = true;
             break;
             
         default:
-            cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.\n";
+            cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.\n";
             break;
         }
     }
@@ -184,80 +197,107 @@ void Game::MainMenu(Player* player)
 
 void Game::battle(Player* player)
 {
-    //¸ó½ºÅÍ ±âº» ½ºÆå ÀÌ¸§, hp, mp, defense ¼ø
-    Monster slime("½½¶óÀÓ", 50, 40, 10, "½½¶óÀÓÀÇ ¾×Ã¼", 5);
+    srand((unsigned int)time(NULL));
+    int randomNum = rand() % 2; 
+    
+    //ëª¬ìŠ¤í„° ê¸°ë³¸ ìŠ¤í™ ì´ë¦„, hp, mp, defense ìˆœ
+    Monster* currentMonster = nullptr;
+    
+    if (randomNum == 0)
+    {
+        currentMonster = new Monster("ìŠ¬ë¼ì„", 50, 40, 10, "ìŠ¬ë¼ì„ì˜ ì•¡ì²´", 5);
+    }
+    else
+    {
+        currentMonster = new Monster("ê³ ë¸”ë¦°", 80, 50, 15, "ë‚¡ì€ ë‹¨ê²€", 15);
+    }
+    
         
     cout << "\n===========================================\n";
-    cout << "[ ÀüÅõ ½ÃÀÛ! ] " << player->getName() << " vs " << slime.getName() << "\n";
+    cout << "[ ì „íˆ¬ ì‹œì‘! ] " << player->getName() << " vs " << currentMonster->getName() << "\n";
     cout << "===========================================\n";
 
-    while (player->getHp() >0 && slime.getHp() >0)
+    while (player->getHp() >0 && currentMonster->getHp() >0)
     {
-        cout << "\n--- ÇÃ·¹ÀÌ¾î ÅÏ ---\n";
+        cout << "\n--- í”Œë ˆì´ì–´ í„´ ---\n";
         player->attack();
             
-        int damage = player->getPower()-slime.getDefence();
+        int damage = player->getPower()-currentMonster->getDefence();
         if (damage <=0) damage = 1;
             
-        int prevHp = slime.getHp();
+        int prevHp = currentMonster->getHp();
         int currentHp = prevHp - damage;
-        slime.setHp(currentHp);
+        currentMonster->setHp(currentHp);
             
-        cout << slime.getName() << "¿¡°Ô" << damage << "µ¥¹ÌÁö" << endl;
-        cout << slime.getName() << "HP: " << prevHp << "->" << endl;
+        cout << currentMonster->getName() << "ì—ê²Œ" << damage << "ë°ë¯¸ì§€" << endl;
+        cout << currentMonster->getName() << "HP: " << prevHp << "->" << currentHp<< endl;
             
-        if (currentHp = 0)
+        if (currentHp <= 0)
         {
-            cout << slime.getName() << "»ç¸Á" << endl;
+            cout << currentMonster->getName() << "ì‚¬ë§" << endl;
             break;
         }else
         {
             cout << endl;
         }
             
-        cout << "\n--- ¸ó½ºÅÍ ÅÏ ---\n";
-        slime.attack(player);
+        cout << "\n--- ëª¬ìŠ¤í„° í„´ ---\n";
+        currentMonster->attack(player);
         cout << player->getName() << "HP:" << player->getHp()<< endl;
     }
         
     if (player->getHp() > 0)
     {
-        cout << "\n ÀüÅõ ½Â¸®! \n";
-        string dropName = slime.getdropItemName();
+        cout << "\n ì „íˆ¬ ìŠ¹ë¦¬! \n";
+        string dropName = currentMonster->getdropItemName();
         int dropPrice = 30;
+        
+        //1. inventory ë§µ ì•ˆì—ì„œ dropnameì„ ì°¾ëŠ”ë‹¤
+        //ëª» ì°¾ìœ¼ë©´ ë§µì˜ ëë¶€ë¶„ ë°˜í™˜ (inventory.end)
+        if (inventory.find(dropName) != inventory.end())
+        {
+            inventory[dropName].quantity++;    
+        }
+        //ëª» ì°¾ì•˜ì„ ê²½ìš° or ì¸ë²¤í† ë¦¬ì— ì²˜ìŒ ë“¤ì–´ì˜¤ëŠ” ì•„ì´í…œì¸ ê²½ìš°
+        // ì•„ì´í…œ ì´ë¦„ê³¼ ê°€ê²©, ìˆ˜ëŸ‰ì„ í•˜ë‚˜ ì¶”ê°€í•¨
+        else
+        {
+            inventory[dropName] = Item(dropName, dropPrice, 1);
+        }
             
-            
-        cout << "ÀÎº¥Åä¸®¿¡ ÀúÀåµÇ¾ú½À´Ï´Ù."<<endl;
-        cout << " (´ÙÀ½ ´Ü°è¿¡¼­ ÀÎº¥Åä¸®¿¡ ÀúÀåµË´Ï´Ù)"<<endl;
+        cout << "ì¸ë²¤í† ë¦¬ì— ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤."<<endl;
+        cout << " (ë‹¤ìŒ ë‹¨ê³„ì—ì„œ ì¸ë²¤í† ë¦¬ì— ì €ì¥ë©ë‹ˆë‹¤)"<<endl;
     } else
     {
-        cout<< "\n ÀüÅõ¿¡¼­ ÆĞ¹èÇß½À´Ï´Ù...\n";
-        cout<<"¸¶À»·Î ÀÌµ¿ÇÕ´Ï´Ù"<<endl;
+        cout<< "\n ì „íˆ¬ì—ì„œ íŒ¨ë°°í–ˆìŠµë‹ˆë‹¤...\n";
+        cout<<"ë§ˆì„ë¡œ ì´ë™í•©ë‹ˆë‹¤"<<endl;
     }
 }
 
 
+//ì¸ë²¤í† ë¦¬ ì¶œë ¥ ë¡œì§
 void Game::showInventory()
 {
-    cout << "\n[ ÀÎº¥Åä¸® (" << inventory.size() << "Á¾·ùÀÇ ¾ÆÀÌÅÛ) ]" << endl;
+    cout << "\n[ ì¸ë²¤í† ë¦¬ (" << inventory.size() << "ì¢…ë¥˜ì˜ ì•„ì´í…œ) ]" << endl;
             
     if (inventory.empty())
     {
-        cout << "ÀÎº¥Åä¸®°¡ ºñ¾îÀÖ½À´Ï´Ù. \n";
+        cout << "ì¸ë²¤í† ë¦¬ê°€ ë¹„ì–´ìˆìŠµë‹ˆë‹¤. \n";
         return;
     }
-    for (auto const& [name, item] : inventory)
+    // inventory ì•ˆì— ìˆëŠ” ë°ì´í„°ë“¤ì„ í•˜ë‚˜ì”© êº¼ë‚´ì„œ pair(ìŒ) ì´ë¼ëŠ” ë³€ìˆ˜ì— ë‹´ëŠ”ë‹¤.
+    for (const auto& pair : inventory)
     {
-        item.printInfo();
+        pair.second.printInfo();
     }
 }
 
 
 void Game::printStatus(string name, int stat[]) {
     cout << "====================================\n";
-    cout << "  " << name << " ÀÇ ÇöÀç ´É·ÂÄ¡\n";
+    cout << "  " << name << " ì˜ í˜„ì¬ ëŠ¥ë ¥ì¹˜\n";
     cout << "====================================\n";
     cout << "HP: " << stat[0] << "    MP: " << stat[1] << "\n";
-    cout << "°ø°İ·Â: " << stat[2] << "    ¹æ¾î·Â: " << stat[3] << "\n";
+    cout << "ê³µê²©ë ¥: " << stat[2] << "    ë°©ì–´ë ¥: " << stat[3] << "\n";
     cout << "====================================\n";
 }
