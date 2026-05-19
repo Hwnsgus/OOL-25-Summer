@@ -1,10 +1,7 @@
-#include "header/Game.h"
-#include <windows.h>
+﻿#include "header/Game.h"
 
 // main.cpp
 int main() {
-    
-    SetConsoleOutputCP(65001);
     
     Game game;
     Player* player = nullptr;
