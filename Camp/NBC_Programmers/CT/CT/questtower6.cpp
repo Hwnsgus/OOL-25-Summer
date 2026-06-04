@@ -5,10 +5,18 @@ int main() {
 
     int ATK, DEF;
     double MUL;
+    double total = 0;
 
-    cout << ATK << " " << MUL << " " << DEF << endl;
+    cin >> ATK >> MUL >> DEF;
 
-    
+    total = ATK * MUL - DEF;
+
+
+    cout << fixed;
+    cout.precision(2);
+
+    cout << total << endl;
+
 
     return 0;
 }
