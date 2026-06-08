@@ -19,5 +19,5 @@ vector<int> solution(vector<int> arr, int divisor) {
     }else{
         sort(answer.begin(), answer.end());
         return answer;
-           } 
+        } 
 }
